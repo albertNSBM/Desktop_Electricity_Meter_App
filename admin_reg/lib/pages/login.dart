@@ -16,53 +16,51 @@ class _LoginState extends State<Login> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage('assets/Reg.png'),)
+              Image(
+                image: AssetImage('assets/Reg.png'),
+              )
             ],
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Column(
             children: [
-              Container(height: 5,width: 600,
-              decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.circular(10)),),
-              Container(width: 600,height: 400,decoration: BoxDecoration(color: Colors.grey),
-              child: Column(children: [
-                SizedBox(height: 30,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              Container(
+                height: 5,
+                width: 600,
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(10)),
+              ),
+              Container(
+                width: 600,
+                height: 400,
+                decoration: BoxDecoration(color: Colors.grey),
+                child: Column(
                   children: [
-                  Text('Admin Login',style: TextStyle(fontWeight: FontWeight.bold),)
-                ],),
-                SizedBox(height: 30,),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                
-                    SizedBox(height: 10,),
-                    Container(
+                    SizedBox(
                       height: 30,
-                      width: 300,
-                      child: TextFormField(
-                              decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  prefixIcon: Icon(Icons.email,size: 10,),
-                                  labelText: 'Email ',
-                                  labelStyle: TextStyle(fontSize: 15.0)),
-                              // validator: (value){
-                              //   if (value == null || value.isEmpty) {
-                              //     return "*";
-                              //   }
-                              // },
-                            )),
-                            SizedBox(height: 40,),
-                          Container(
-                            height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Admin Login',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            height: 50,
                             width: 300,
                             child: TextFormField(
                               decoration: InputDecoration(
@@ -74,7 +72,38 @@ class _LoginState extends State<Login> {
                                     borderSide:
                                         BorderSide(color: Colors.redAccent),
                                   ),
-                                  prefixIcon: Icon(Icons.lock,size: 10,),
+                                  prefixIcon: Icon(
+                                    Icons.email,
+                                    size: 10,
+                                  ),
+                                  labelText: 'Email ',
+                                  labelStyle: TextStyle(fontSize: 15.0)),
+                              // validator: (value){
+                              //   if (value == null || value.isEmpty) {
+                              //     return "*";
+                              //   }
+                              // },
+                            )),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                            height: 50,
+                            width: 300,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.redAccent),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.redAccent),
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.lock,
+                                    size: 10,
+                                  ),
                                   labelText: 'Password ',
                                   labelStyle: TextStyle(fontSize: 15.0)),
                               // validator: (value){
@@ -83,14 +112,14 @@ class _LoginState extends State<Login> {
                               //   }
                               // },
                             )),
-
-            
-
-                  ],
-                ),
-                SizedBox(height: 60,),
-               ElevatedButton(
+                      ],
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    ElevatedButton(
                         onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/home');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
@@ -103,10 +132,13 @@ class _LoginState extends State<Login> {
                           'Login',
                           style: TextStyle(color: Colors.black),
                         )),
-              ],),)
+                  ],
+                ),
+              )
             ],
           )
-        ],),
+        ],
+      ),
     );
   }
 }

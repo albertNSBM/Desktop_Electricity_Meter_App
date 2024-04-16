@@ -1,6 +1,10 @@
+import 'package:admin_reg/pages/desplacement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:admin_reg/pages/new.dart';
+import 'package:admin_reg/pages/replace.dart';
+import 'package:admin_reg/pages/repair.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,8 +23,21 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Row(children:[Text('Admin',style: TextStyle(color: Colors.redAccent[100],fontWeight: FontWeight.bold),),
-          SizedBox(width:850,),TextButton(onPressed: (){}, child: Text('Logout'))]),
+          title: Row(children: [
+            Text(
+              'Admin',
+              style: TextStyle(
+                  color: Colors.redAccent[100], fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              width: 850,
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
+                child: Text('Logout'))
+          ]),
           centerTitle: true,
         ),
         body: Row(
@@ -28,16 +45,13 @@ class _HomeState extends State<Home> {
             Content(),
             Expanded(
                 child: PageView(
+                physics: NeverScrollableScrollPhysics(),
               controller: pageController,
               children: [
-                Container(
-                  color: Colors.black,
-                ),
-                Container(color: Colors.green),
-                Container(),
-                Container(
-                  color: Colors.blue,
-                ),
+                New(),
+                Replace(),
+                Repair(),
+                Desplacement(),
               ],
             ))
           ],
@@ -51,7 +65,7 @@ class _HomeState extends State<Home> {
         NavigationRail(
           backgroundColor: Colors.grey[300],
           selectedIconTheme: IconThemeData(color: Colors.redAccent[100]),
-          onDestinationSelected:(newIndex) {
+          onDestinationSelected: (newIndex) {
             setState(() {
               selectedIndex = newIndex;
               pageController.animateToPage(newIndex,
