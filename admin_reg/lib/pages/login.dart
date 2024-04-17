@@ -8,6 +8,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,73 +54,78 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: 30,
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                            height: 50,
-                            width: 300,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.email,
-                                    size: 10,
-                                  ),
-                                  labelText: 'Email ',
-                                  labelStyle: TextStyle(fontSize: 15.0)),
-                              // validator: (value){
-                              //   if (value == null || value.isEmpty) {
-                              //     return "*";
-                              //   }
-                              // },
-                            )),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                            height: 50,
-                            width: 300,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.redAccent),
-                                  ),
-                                  prefixIcon: Icon(
-                                    Icons.lock,
-                                    size: 10,
-                                  ),
-                                  labelText: 'Password ',
-                                  labelStyle: TextStyle(fontSize: 15.0)),
-                              // validator: (value){
-                              //   if (value == null || value.isEmpty) {
-                              //     return "*";
-                              //   }
-                              // },
-                            )),
-                      ],
+                    Form(
+                      key: _key,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              height: 50,
+                              width: 300,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.email,
+                                      size: 10,
+                                    ),
+                                    labelText: 'Email ',
+                                    labelStyle: TextStyle(fontSize: 15.0)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "*";
+                                  }
+                                },
+                              )),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Container(
+                              height: 50,
+                              width: 300,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.lock,
+                                      size: 10,
+                                    ),
+                                    labelText: 'Password ',
+                                    labelStyle: TextStyle(fontSize: 15.0)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "*";
+                                  }
+                                },
+                              )),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 60,
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          if (_key.currentState!.validate()) {
+                            Navigator.pushReplacementNamed(context, '/home');
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
