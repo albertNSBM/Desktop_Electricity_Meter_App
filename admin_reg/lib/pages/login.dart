@@ -63,7 +63,7 @@ class _LoginState extends State<Login> {
                             height: 10,
                           ),
                           Container(
-                              height: 50,
+                              height: 80,
                               width: 300,
                               child: TextFormField(
                                 decoration: InputDecoration(
@@ -88,12 +88,13 @@ class _LoginState extends State<Login> {
                                 },
                               )),
                           SizedBox(
-                            height: 40,
+                            height: 60,
                           ),
                           Container(
-                              height: 50,
+                              height: 80,
                               width: 300,
                               child: TextFormField(
+                                obscureText: true,
                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -103,6 +104,7 @@ class _LoginState extends State<Login> {
                                       borderSide:
                                           BorderSide(color: Colors.redAccent),
                                     ),
+                                    
                                     prefixIcon: Icon(
                                       Icons.lock,
                                       size: 10,
@@ -119,7 +121,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     SizedBox(
-                      height: 60,
+                      height: 50,
                     ),
                     ElevatedButton(
                         onPressed: () {
