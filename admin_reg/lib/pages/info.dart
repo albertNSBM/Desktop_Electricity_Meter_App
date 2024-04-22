@@ -49,9 +49,16 @@ class _InfoState extends State<Info> {
                         width: 400,
                         height: 10,
                       ),
-                      Text('Client-Info',style: TextStyle(fontWeight: FontWeight.bold),),
+                      Text(
+                        'Client-Info',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(width: 230),
-                      TextButton(onPressed: () {}, child: Text('Logout'))
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, '/login');
+                          },
+                          child: Text('Logout'))
                     ],
                   ),
                   SizedBox(
@@ -161,13 +168,11 @@ class _InfoState extends State<Info> {
                       )
                     ],
                   ),
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
                         children: [
-                         
                           Container(
                             height: 30,
                             width: 100,
@@ -193,13 +198,13 @@ class _InfoState extends State<Info> {
                               icon: Icon(Icons.keyboard_arrow_down),
                             ),
                           ),
-                          SizedBox(height: 10,),
-                            ElevatedButton(
-                              onPressed: () {
-                            
-                              },
+                          SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor:Color(0xffEBEDFE),
+                                backgroundColor: Color(0xffEBEDFE),
                                 minimumSize: Size(200, 40),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
