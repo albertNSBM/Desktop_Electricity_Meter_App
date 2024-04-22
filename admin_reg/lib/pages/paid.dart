@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 
 class Paid extends StatefulWidget {
@@ -49,7 +50,7 @@ class _PaidState extends State<Paid> {
                           width: 400,
                           height: 10,
                         ),
-                        Text('Client-Info'),
+                        Text('Client-Info',style: TextStyle(fontWeight: FontWeight.bold),),
                         SizedBox(width: 230),
                         TextButton(onPressed: () {}, child: Text('Logout'))
                       ],
@@ -231,6 +232,14 @@ class _PaidState extends State<Paid> {
                         )
                       ],
                     ),
+                    Container(
+                      height: 60,
+                      width: 100,
+                      child:TextButton(
+                        onPressed: (){
+                            Navigator.pushReplacementNamed(context, '/home');
+                          },child:Row(
+                          children: [Icon(Icons.arrow_back),Text('Back')],),))
                   ],
                 ),
               ),
