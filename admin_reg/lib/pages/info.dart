@@ -10,14 +10,11 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> {
-  void dropdowncallback(String? selectedValue) {
-    if (selectedValue is String) {
-      setState(() {
-        var _dropdownValue = selectedValue;
-      });
-    }
-  }
-
+  String _dropdownValue = 'Byemejwe';
+  var _items = [
+    'Byemejwe',
+    'Byanzwe',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +64,7 @@ class _InfoState extends State<Info> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Names:....................'),
+                            Text('Amazina:....................'),
                             SizedBox(
                               height: 10,
                             ),
@@ -164,18 +161,54 @@ class _InfoState extends State<Info> {
                       )
                     ],
                   ),
+                  
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
                         children: [
-                          DropdownButton(
-                            items: [
-                              DropdownMenuItem(child: Text('Byemejwe')),
-                              DropdownMenuItem(child: Text('Byanzwe'))
-                            ],
-                            value: _dropdownValue,
-                            onChanged: dropdowncallback,
-                          )
+                         
+                          Container(
+                            height: 30,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Color(0xffEBEDFE),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DropdownButton(
+                              items: _items.map(
+                                (String item) {
+                                  return DropdownMenuItem(
+                                      value: item, child: Text(item));
+                                },
+                              ).toList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _dropdownValue = newValue!;
+                                });
+                              },
+                              value: _dropdownValue,
+                              borderRadius: BorderRadius.circular(10),
+                              style: TextStyle(color: Colors.black),
+                              icon: Icon(Icons.keyboard_arrow_down),
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                            ElevatedButton(
+                              onPressed: () {
+                            
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:Color(0xffEBEDFE),
+                                minimumSize: Size(200, 40),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(2))),
+                              ),
+                              child: Text(
+                                'Save',
+                                style: TextStyle(color: Colors.black),
+                              )),
                         ],
                       )
                     ],
