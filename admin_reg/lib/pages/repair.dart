@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Repair extends StatefulWidget {
   const Repair({super.key});
 
@@ -9,12 +8,11 @@ class Repair extends StatefulWidget {
 }
 
 class _RepairState extends State<Repair> {
-   final List _list = [
-   'Record1',
-   'Record2',
-   'Record3',
-   'Record4',
-   
+  final List _list = [
+    'Record1',
+    'Record2',
+    'Record3',
+    'Record4',
   ];
   @override
   Widget build(BuildContext context) {
