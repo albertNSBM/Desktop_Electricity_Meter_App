@@ -10,10 +10,10 @@ class Paid extends StatefulWidget {
 }
 
 class _PaidState extends State<Paid> {
-  String _dropdownValue = 'Byemejwe';
+  String _dropdownValue = 'Accept';
   var _items = [
-    'Byemejwe',
-    'Byanzwe',
+    'Accept',
+    'Reject',
   ];
   @override
   Widget build(BuildContext context) {
@@ -71,27 +71,27 @@ class _PaidState extends State<Paid> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Amazina:   ....................'),
+                              Text('Names:   ....................'),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Akarere:   ...................'),
+                              Text('District:   ...................'),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Umurenge:   ..................'),
+                              Text('Sector:   ..................'),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Akagari:    ...................'),
+                              Text('Cell:    ...................'),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('Umudugudu:  ................'),
+                              Text('Village:  ................'),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('No Yinzu:   ...................'),
+                              Text('House No:   ...................'),
                             ],
                           ),
                         ),
@@ -108,7 +108,7 @@ class _PaidState extends State<Paid> {
                                 height: 10,
                               ),
                               Text(
-                                "Photocopi Y'indangamuntu",
+                                "Copy of ID",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               ElevatedButton(
@@ -133,7 +133,7 @@ class _PaidState extends State<Paid> {
                                 height: 20,
                               ),
                               Text(
-                                "Icyangombwa Cy'ubutaka",
+                                "Copy of UPI",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               ElevatedButton(
@@ -179,7 +179,7 @@ class _PaidState extends State<Paid> {
                                         Icons.download,
                                         size: 25,
                                       ),
-                                      Text('Inyemezabwishyu'),
+                                      Text('Receipt'),
                                     ],
                                   )),
                             ],

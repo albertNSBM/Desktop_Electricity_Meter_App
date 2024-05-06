@@ -10,10 +10,10 @@ class Info extends StatefulWidget {
 }
 
 class _InfoState extends State<Info> {
-  String _dropdownValue = 'Byemejwe';
+  String _dropdownValue = 'Accept';
   var _items = [
-    'Byemejwe',
-    'Byanzwe',
+    'Accept',
+    'Reject',
   ];
   @override
   Widget build(BuildContext context) {
@@ -71,27 +71,27 @@ class _InfoState extends State<Info> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Amazina:....................'),
+                            Text('Names:....................'),
                             SizedBox(
                               height: 10,
                             ),
-                            Text('Akarere:...................'),
+                            Text('District:...................'),
                             SizedBox(
                               height: 10,
                             ),
-                            Text('Umurenge:..................'),
+                            Text('Sector:..................'),
                             SizedBox(
                               height: 10,
                             ),
-                            Text('Akagari:...................'),
+                            Text('Cell:...................'),
                             SizedBox(
                               height: 10,
                             ),
-                            Text('Umudugudu:................'),
+                            Text('Village:................'),
                             SizedBox(
                               height: 10,
                             ),
-                            Text('No Yinzu:...................'),
+                            Text('House No:...................'),
                           ],
                         ),
                       ),
@@ -108,7 +108,7 @@ class _InfoState extends State<Info> {
                               height: 10,
                             ),
                             Text(
-                              "Photocopi Y'indangamuntu",
+                              "Copy of ID",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             ElevatedButton(
@@ -133,7 +133,7 @@ class _InfoState extends State<Info> {
                               height: 20,
                             ),
                             Text(
-                              "Icyangombwa Cy'ubutaka",
+                              "Copy of UPI",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             ElevatedButton(
