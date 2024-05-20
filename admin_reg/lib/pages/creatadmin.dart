@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Create_Admin extends StatefulWidget {
+  const Create_Admin({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Create_Admin> createState() => _Create_AdminState();
 }
 
-class _LoginState extends State<Login> {
+class _Create_AdminState extends State<Create_Admin> {
   final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _LoginState extends State<Login> {
               ),
               Container(
                 width: 600,
-                height: 450,
+                height: 700,
                 decoration: BoxDecoration(color: Colors.grey),
                 child: Column(
                   children: [
@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Admin Login',
+                          'Create Admin',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
@@ -76,6 +76,34 @@ class _LoginState extends State<Login> {
                                           BorderSide(color: Colors.redAccent),
                                     ),
                                     prefixIcon: Icon(
+                                      Icons.person,
+                                      size: 10,
+                                    ),
+                                    labelText: 'Full Names',
+                                    labelStyle: TextStyle(fontSize: 15.0)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "*";
+                                  }
+                                },
+                              )),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              height: 80,
+                              width: 300,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    prefixIcon: Icon(
                                       Icons.email,
                                       size: 10,
                                     ),
@@ -88,7 +116,7 @@ class _LoginState extends State<Login> {
                                 },
                               )),
                           SizedBox(
-                            height: 60,
+                            height: 20,
                           ),
                           Container(
                               height: 80,
@@ -104,12 +132,40 @@ class _LoginState extends State<Login> {
                                       borderSide:
                                           BorderSide(color: Colors.redAccent),
                                     ),
-                                    
                                     prefixIcon: Icon(
                                       Icons.lock,
                                       size: 10,
                                     ),
                                     labelText: 'Password ',
+                                    labelStyle: TextStyle(fontSize: 15.0)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "*";
+                                  }
+                                },
+                              )),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                              height: 80,
+                              width: 300,
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.lock,
+                                      size: 10,
+                                    ),
+                                    labelText: 'Confirm Password',
                                     labelStyle: TextStyle(fontSize: 15.0)),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -126,7 +182,7 @@ class _LoginState extends State<Login> {
                     ElevatedButton(
                         onPressed: () {
                           if (_key.currentState!.validate()) {
-                            Navigator.pushReplacementNamed(context, '/home');
+                           Navigator.pushReplacementNamed(context, '/login');
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -137,16 +193,18 @@ class _LoginState extends State<Login> {
                                   BorderRadius.all(Radius.circular(2))),
                         ),
                         child: Text(
-                          'Login',
+                          'Create',
                           style: TextStyle(color: Colors.black),
                         )),
-                        SizedBox(height: 20,),
-                        TextButton(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/create');
+                        Navigator.pushReplacementNamed(context, '/login');
                       },
                       child: Text(
-                        'Create Admin?',
+                        'Login?',
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
