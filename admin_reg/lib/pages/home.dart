@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
                   size: 30,
                 ),
                 label: Text(
-                  "Report(s)",
+                  "All Served",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )),
           ],
