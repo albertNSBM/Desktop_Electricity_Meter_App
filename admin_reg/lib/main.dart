@@ -10,7 +10,7 @@ import 'package:admin_reg/pages/creatadmin.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/login',
+    initialRoute: '/home',
     routes: {
       '/home': (context) => Home(),
       '/login': (context) => Login(),

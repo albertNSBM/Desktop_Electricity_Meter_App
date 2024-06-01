@@ -118,6 +118,15 @@ class _HomeState extends State<Home> {
                   "Displace",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )),
+                 NavigationRailDestination(
+                icon: Icon(
+                  Icons.report,
+                  size: 30,
+                ),
+                label: Text(
+                  "Report(s)",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                )),
           ],
           labelType: labelType,
         ),
