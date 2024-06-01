@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:validators/validators.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +13,64 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _key = GlobalKey<FormState>();
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  Future<void> login(Map<String, dynamic> jsonData) async {
+    Map<String, dynamic> jsonData = {
+      'email': email.text,
+      'password': password.text,
+    };
+
+    final response = await http.post(Uri.parse('http://127.0.0.1:8000/api/login/'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(jsonData),
+    );
+
+    if(response.statusCode == 401) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+              title: Text("Unauthenticated"),
+              content: Text("Invalid cre")
+          );
+        },
+      );
+    }
+    else {
+      if (response.body != null) {
+
+        try {
+          Map<String, dynamic> responseData = json.decode(response.body);
+
+          print(responseData);
+
+          final token = responseData['token'];
+
+          final userId = responseData['user']['id'].toString();
+
+          final storage = new FlutterSecureStorage();
+
+          await storage.write(key: 'auth_token', value: token);
+
+          await storage.write(key: 'user_id', value: userId);
+
+          Navigator.pushReplacementNamed(context, '/home');
+        }
+        catch (e) {
+          print("Error: $e");
+        }
+      }
+
+    }
+  }
+
+  bool isEmailCorrect=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +128,7 @@ class _LoginState extends State<Login> {
                               height: 80,
                               width: 300,
                               child: TextFormField(
+                                controller: email,
                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -94,6 +157,7 @@ class _LoginState extends State<Login> {
                               height: 80,
                               width: 300,
                               child: TextFormField(
+                                controller: password,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
@@ -125,9 +189,7 @@ class _LoginState extends State<Login> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          if (_key.currentState!.validate()) {
-                            Navigator.pushReplacementNamed(context, '/home');
-                          }
+                          login({'key': 'value'});
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,

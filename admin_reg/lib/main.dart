@@ -10,11 +10,10 @@ import 'package:admin_reg/pages/creatadmin.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/create',
+    initialRoute: '/login',
     routes: {
       '/home': (context) => Home(),
       '/login': (context) => Login(),
-      '/info': (context) => Info(),
       '/paid': (context) => Paid(),
       '/repair': (context) => Repair(),
       '/create': (context) => Create_Admin()
