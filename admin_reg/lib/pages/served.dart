@@ -1,3 +1,4 @@
+import 'package:admin_reg/pages/table.dart';
 import 'package:flutter/material.dart';
 class Served extends StatefulWidget {
   const Served({super.key});
@@ -13,7 +14,7 @@ class _ServedState extends State<Served> {
       appBar: AppBar(
         title: Center ( child:Text('List of All served clients'),)
       ),
-      body: ListView(),
+      body:MyTable()
     );
   }
 }

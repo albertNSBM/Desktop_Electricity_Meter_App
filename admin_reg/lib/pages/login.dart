@@ -3,6 +3,7 @@ import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:admin_reg/configs/api.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -23,12 +24,14 @@ class _LoginState extends State<Login> {
       'password': password.text,
     };
 
-    final response = await http.post(Uri.parse('http://127.0.0.1:8000/api/login/'),
+    final response = await http.post(Uri.parse('${BackendUrl}/api/login/'),
       headers: {
         'Content-Type': 'application/json',
       },
       body: jsonEncode(jsonData),
     );
+
+    print(response.statusCode);
 
     if(response.statusCode == 401) {
       showDialog(
@@ -36,7 +39,7 @@ class _LoginState extends State<Login> {
         builder: (BuildContext context){
           return AlertDialog(
               title: Text("Unauthenticated"),
-              content: Text("Invalid cre")
+              content: Text("Invalid credentials")
           );
         },
       );
@@ -46,8 +49,6 @@ class _LoginState extends State<Login> {
 
         try {
           Map<String, dynamic> responseData = json.decode(response.body);
-
-          print(responseData);
 
           final token = responseData['token'];
 
@@ -132,11 +133,11 @@ class _LoginState extends State<Login> {
                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.redAccent),
+                                      BorderSide(color: Colors.redAccent),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.redAccent),
+                                      BorderSide(color: Colors.redAccent),
                                     ),
                                     prefixIcon: Icon(
                                       Icons.email,
@@ -162,13 +163,13 @@ class _LoginState extends State<Login> {
                                 decoration: InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.redAccent),
+                                      BorderSide(color: Colors.redAccent),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.redAccent),
+                                      BorderSide(color: Colors.redAccent),
                                     ),
-                                    
+
                                     prefixIcon: Icon(
                                       Icons.lock,
                                       size: 10,
@@ -196,22 +197,12 @@ class _LoginState extends State<Login> {
                           minimumSize: Size(200, 40),
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(2))),
+                              BorderRadius.all(Radius.circular(2))),
                         ),
                         child: Text(
                           'Login',
                           style: TextStyle(color: Colors.black),
                         )),
-                        SizedBox(height: 20,),
-                        TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/create');
-                      },
-                      child: Text(
-                        'Create Admin?',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
                   ],
                 ),
               )

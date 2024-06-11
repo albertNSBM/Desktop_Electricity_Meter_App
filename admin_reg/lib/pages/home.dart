@@ -50,6 +50,8 @@ class _HomeState extends State<Home> {
         body: Row(
           children: [
             Content(),
+
+
             Expanded(
                 child: PageView(
                 physics: NeverScrollableScrollPhysics(),
@@ -123,9 +125,14 @@ class _HomeState extends State<Home> {
                   Icons.report,
                   size: 30,
                 ),
-                label: Text(
-                  "All Served",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                label: TextButton(
+                  onPressed: (){
+                    Navigator.pushReplacementNamed(context, '/served');
+                  },
+                  child: Text(
+                    "All Served",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 )),
           ],
           labelType: labelType,

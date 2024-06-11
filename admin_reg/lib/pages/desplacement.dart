@@ -4,6 +4,19 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:admin_reg/pages/info.dart';
+import 'dart:io' as io;
+import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xcel;
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/foundation.dart'; // Import foundation for kIsWeb
+import 'dart:html' as html;
+import 'package:admin_reg/configs/api.dart';
+
+Future<void> requestPermissions() async {
+  if (!kIsWeb) {
+    await Permission.storage.request();
+  }
+}
 
 class Desplacement extends StatefulWidget {
   const Desplacement({super.key});
@@ -26,7 +39,7 @@ class _DisplaceState extends State<Desplacement> {
   Future<void> getNewRequests() async {
     String? user = await storage.read(key: 'user_id');
     String? authToken = await storage.read(key: 'auth_token');
-    final url = Uri.parse('http://127.0.0.1:8000/api/displace-requests/');
+    final url = Uri.parse('${BackendUrl}/api/displace-requests/');
     final response = await http.get(
       url,
       headers: {
@@ -56,9 +69,67 @@ class _DisplaceState extends State<Desplacement> {
     }
   }
 
+  Future<void> _downloadReport() async {
+    await requestPermissions();
+
+    final xcel.Workbook workbook = xcel.Workbook();
+    final xcel.Worksheet sheet = workbook.worksheets[0];
+
+    // Adding column headers
+    sheet.getRangeByName('A1').setText('Date');
+    sheet.getRangeByName('B1').setText('Client');
+    sheet.getRangeByName('C1').setText('Service');
+
+    // Adding data from dispenses
+    for (int i = 0; i < requests.length; i++) {
+      final request = requests[i];
+      sheet.getRangeByName('A${i + 2}').setText(formatDate(request['requested_on']));
+      sheet.getRangeByName('A${i + 2}').setText(formatDate(request['requested_on']));
+      sheet.getRangeByName('B${i + 2}').setText('${request['client']['first_name']} ${request['client']['last_name']}');
+      sheet.getRangeByName('C${i + 2}').setText(request['requested_service']);
+    }
+
+    try {
+      // Save the workbook to bytes
+      final List<int> bytes = workbook.saveAsStream();
+      workbook.dispose();
+
+      if (!kIsWeb) {
+        // Mobile platform file saving
+        // Make sure to handle file operations correctly for mobile platforms
+      } else {
+        // Web-specific file saving
+        final blob = html.Blob([bytes], 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute('download', 'displace_meter_requests.xlsx')
+          ..click();
+        html.Url.revokeObjectUrl(url);
+        print('Excel file downloaded successfully');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Excel file downloaded')),
+        );
+      }
+    } catch (e) {
+      print('Error generating Excel file: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error generating Excel file')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Displace meter requests'),
+        actions: [
+          TextButton(
+            child: Text('Download report'),
+            onPressed: _downloadReport,
+          ),
+        ],
+      ),
       body: ListView.builder(
           itemCount: requests.length,
           itemBuilder: (context, index) {
